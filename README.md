@@ -1,3 +1,5 @@
+**WARNING: this software is work in progress.**
+
 [![GoDoc](https://godoc.org/github.com/virvum/scmc?status.svg)](https://godoc.org/github.com/virvum/scmc)
 [![Go Report Card](https://goreportcard.com/badge/github.com/virvum/scmc)](https://goreportcard.com/report/github.com/virvum/scmc)
 
