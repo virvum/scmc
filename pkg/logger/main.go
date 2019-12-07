@@ -10,8 +10,10 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
+// Log Level type.
 type Level int
 
+// Log level constants.
 const (
 	Trace Level = iota
 	Debug
@@ -21,16 +23,20 @@ const (
 	Fatal
 )
 
+// Available log levels as strings.
 var LogLevels []string = []string{"trace", "debug", "info", "warn", "error", "fatal"}
 
+// Returns the log level as a string.
 func (l Level) String() string {
 	return LogLevels[l]
 }
 
+// Return the type of "Level".
 func (l Level) Type() string {
 	return "string"
 }
 
+// Set the log level.
 func (l *Level) Set(level string) error {
 	switch strings.ToLower(level) {
 	case "trace":
@@ -52,6 +58,7 @@ func (l *Level) Set(level string) error {
 	return nil
 }
 
+// UnmashalYAML unmarshals the logger Level type.
 func (l Level) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var s string
 
@@ -66,12 +73,14 @@ func (l Level) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
+// Logger Log type.
 type Log struct {
 	Level    Level
 	Color    bool
 	RootPath string
 }
 
+// New creates a new logger instance.
 func New(level Level, color bool, rootPath string) Log {
 	return Log{
 		Level:    level,
@@ -118,46 +127,57 @@ func (l *Log) log(level Level, format string, args []interface{}) {
 	}
 }
 
+// IsTrace returns true if the log level includes trace messages, otherwise false.
 func (l *Log) IsTrace() bool {
 	return l.Level <= Trace
 }
 
+// IsDebug returns true if the log level includes debug messages, otherwise false.
 func (l *Log) IsDebug() bool {
 	return l.Level <= Debug
 }
 
+// IsInfo returns true if the log level includes informational messages, otherwise false.
 func (l *Log) IsInfo() bool {
 	return l.Level <= Info
 }
 
+// IsWarn returns true if the log level includes warning messages, otherwise false.
 func (l *Log) IsWarn() bool {
 	return l.Level <= Warn
 }
 
+// IsError returns true if the log level includes error messages, otherwise false.
 func (l *Log) IsError() bool {
 	return l.Level <= Error
 }
 
+// Trace logs a message useful for tracing logic-level program flow.
 func (l *Log) Trace(format string, args ...interface{}) {
 	l.log(Trace, format, args)
 }
 
+// Debug logs a message useful for debugging issues.
 func (l *Log) Debug(format string, args ...interface{}) {
 	l.log(Debug, format, args)
 }
 
+// Info logs an informational message.
 func (l *Log) Info(format string, args ...interface{}) {
 	l.log(Info, format, args)
 }
 
+// Warn logs a warning message.
 func (l *Log) Warn(format string, args ...interface{}) {
 	l.log(Warn, format, args)
 }
 
+// Error logs an error message.
 func (l *Log) Error(format string, args ...interface{}) {
 	l.log(Error, format, args)
 }
 
+// Fatal logs a fatal message and exits the program.
 func (l *Log) Fatal(format string, args ...interface{}) {
 	l.log(Fatal, format, args)
 	os.Exit(1)

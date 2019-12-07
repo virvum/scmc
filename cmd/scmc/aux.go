@@ -6,12 +6,12 @@ import (
 )
 
 const (
-	Kibibyte float64 = 1024
-	Mebibyte         = Kibibyte * 1024
-	Gibibyte         = Mebibyte * 1024
-	Tebibyte         = Gibibyte * 1024
-	Pebibyte         = Tebibyte * 1024
-	Exbibyte         = Pebibyte * 1024
+	kibibyte float64 = 1024
+	mebibyte         = kibibyte * 1024
+	gibibyte         = mebibyte * 1024
+	tebibyte         = gibibyte * 1024
+	pebibyte         = tebibyte * 1024
+	exbibyte         = pebibyte * 1024
 )
 
 func bytesToSize(b uint64) string {
@@ -21,21 +21,21 @@ func bytesToSize(b uint64) string {
 	)
 
 	switch {
-	case v >= Exbibyte:
+	case v >= exbibyte:
 		u = "EiB"
-		v /= Exbibyte
-	case v >= Tebibyte:
+		v /= exbibyte
+	case v >= tebibyte:
 		u = "TiB"
-		v /= Tebibyte
-	case v >= Gibibyte:
+		v /= tebibyte
+	case v >= gibibyte:
 		u = "GiB"
-		v /= Gibibyte
-	case v >= Mebibyte:
+		v /= gibibyte
+	case v >= mebibyte:
 		u = "MiB"
-		v /= Mebibyte
-	case v >= Kibibyte:
+		v /= mebibyte
+	case v >= kibibyte:
 		u = "KiB"
-		v /= Kibibyte
+		v /= kibibyte
 	default:
 		return fmt.Sprintf("%d B", int(v))
 	}

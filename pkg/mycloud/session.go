@@ -69,7 +69,7 @@ func (mc *MyCloud) srequest(method string, uri string, qs map[string]string, dat
 		request.URL.RawQuery = q.Encode()
 	}
 
-	if log.Level <= logger.Debug {
+	if log.IsDebug() {
 		requestDump, err := httputil.DumpRequestOut(request, log.Level <= logger.Trace)
 		if err != nil {
 			log.Debug("httputil.DumpRequest: %v", err)
@@ -86,7 +86,7 @@ func (mc *MyCloud) srequest(method string, uri string, qs map[string]string, dat
 		return nil, err
 	}
 
-	if log.Level <= logger.Debug {
+	if log.IsDebug() {
 		requestDump, err := httputil.DumpResponse(response, log.Level <= logger.Trace)
 		if err != nil {
 			log.Debug("httputil.DumpRequest: %v", err)
@@ -149,16 +149,16 @@ func (mc *MyCloud) authenticate(username string, password string) error {
 		return fmt.Errorf("url.ParseQuery: %v", err)
 	}
 
-	auth_state := params.Get("auth_state")
-	if auth_state == "" {
+	authState := params.Get("auth_state")
+	if authState == "" {
 		return fmt.Errorf("params.Get: 'auth_state' is empty")
 	}
 
 	// Append "=" to the auth_state base64 string, otherwise we get
 	// the error "illegal base64 data at input byte 92".
-	auth_state += "="
+	authState += "="
 
-	err = mc.setAuthState(auth_state)
+	err = mc.setAuthState(authState)
 	if err != nil {
 		return fmt.Errorf("mc.setAuthState: %v", err)
 	}
@@ -194,13 +194,13 @@ func (mc *MyCloud) authenticate(username string, password string) error {
 
 	params, err = url.ParseQuery(r.Request.URL.RawQuery)
 
-	access_token := params.Get("access_token")
-	if access_token == "" {
+	accessToken := params.Get("access_token")
+	if accessToken == "" {
 		return errors.New("no access token was returned")
 	}
 
 	// In the returned base64 access token the plus character has been replaced with a space character.
-	mc.accessToken = strings.Replace(params.Get("access_token"), " ", "+", -1)
+	mc.accessToken = strings.Replace(accessToken, " ", "+", -1)
 
 	return nil
 }

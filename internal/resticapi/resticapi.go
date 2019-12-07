@@ -13,6 +13,7 @@ import (
 
 var log logger.Log
 
+// New creates a restic REST API resource.
 func New(l logger.Log) *API {
 	log = l
 
