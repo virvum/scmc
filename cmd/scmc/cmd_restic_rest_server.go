@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 	"os"
-	"strings"
 	"os/signal"
+	"strings"
 	"time"
 
 	"github.com/virvum/scmc/internal/resticapi"
@@ -24,9 +24,9 @@ type ResticRestServerOptions struct {
 var resticRestServerOptions ResticRestServerOptions
 
 var cmdResticRestServer = &cobra.Command{
-	Use:               "restic-rest-server",
-	Short:             "Launch the restic REST server",
-	Long:              strings.TrimSpace(`
+	Use:   "restic-rest-server",
+	Short: "Launch the restic REST server",
+	Long: strings.TrimSpace(`
 The "restic-rest-server" command launches a restic REST API compliant server
 which acts as a proxy to myCloud.
 
