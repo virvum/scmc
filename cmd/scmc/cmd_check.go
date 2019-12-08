@@ -12,6 +12,7 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
+// CheckOptions represents options for the command "check".
 type CheckOptions struct {
 	Username string
 	Password string
@@ -78,6 +79,7 @@ func init() {
 	f.StringVarP(&checkOptions.Password, "password", "p", os.Getenv("MYCLOUD_PASSWORD"), "Swisscom myCloud password (default: $MYCLOUD_PASSWORD)")
 }
 
+// Check represents a single check name and its function containing the check's logic.
 type Check struct {
 	Name string
 	Fn   func(*mycloud.MyCloud) error

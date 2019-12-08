@@ -13,6 +13,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// ResticRestServerOptions represents options for the command "restic-rest-server".
 type ResticRestServerOptions struct {
 	Address         string
 	ReadTimeout     time.Duration

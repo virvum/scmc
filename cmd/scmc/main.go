@@ -12,6 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// GlobalOptions represents global options for all commands.
 type GlobalOptions struct {
 	ConfigFile string
 	LogLevel   logger.Level

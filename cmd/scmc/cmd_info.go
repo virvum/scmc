@@ -15,6 +15,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// InfoOptions represents options for the command "info".
 type InfoOptions struct {
 	Username string
 	Password string

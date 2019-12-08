@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// MountOptions represents options for the command "mount".
 type MountOptions struct {
 	Username string
 	Password string
