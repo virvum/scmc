@@ -9,12 +9,14 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// Config type.
 type Config struct {
 	Username string
 	Password string
 	LogLevel logger.Level
 }
 
+// Load loads the configuration from the given configuration file into type Config.
 func Load(configFile string, log *logger.Log) (*Config, error) {
 	var cfg Config
 

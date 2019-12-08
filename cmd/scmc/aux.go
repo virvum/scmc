@@ -16,7 +16,7 @@ const (
 
 func bytesToSize(b uint64) string {
 	var (
-		u string  = ""
+		u string
 		v float64 = float64(b)
 	)
 

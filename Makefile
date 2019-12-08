@@ -28,7 +28,10 @@ godoc:
 gofmt:
 	find . -type f -name '*.go' | xargs gofmt -s -e -d -w
 
+golint:
+	golint ./...
+
 govet:
 	find . -type f -name '*.go' | xargs dirname | sort -u | xargs go vet
 
-.PHONY: help build install godoc gofmt govet
+.PHONY: help build install godoc gofmt golint govet

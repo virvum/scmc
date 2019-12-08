@@ -15,8 +15,8 @@ import (
 	"github.com/google/uuid"
 )
 
-func (mc *MyCloud) setAuthState(auth_state string) error {
-	jsonData, err := base64.StdEncoding.DecodeString(auth_state)
+func (mc *MyCloud) setAuthState(authState string) error {
+	jsonData, err := base64.StdEncoding.DecodeString(authState)
 	if err != nil {
 		return err
 	}

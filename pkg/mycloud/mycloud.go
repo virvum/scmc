@@ -80,9 +80,9 @@ func (mc *MyCloud) Request(r Request) error {
 	request.Header.Add("Origin", "https://www.mycloud.ch/")
 	request.Header.Add("Referer", "https://www.mycloud.ch/")
 
-	if r.HttpRange != "" {
-		log.Debug("setting HTTP range: %s", r.HttpRange)
-		request.Header.Add("Range", r.HttpRange)
+	if r.HTTPRange != "" {
+		log.Debug("setting HTTP range: %s", r.HTTPRange)
+		request.Header.Add("Range", r.HTTPRange)
 	}
 
 	// TODO
@@ -247,7 +247,7 @@ func (mc *MyCloud) Delete(paths []string) error {
 		requestBody.Items = append(requestBody.Items, pathPrefix+p)
 	}
 
-	reqJson, err := json.Marshal(requestBody)
+	reqJSON, err := json.Marshal(requestBody)
 	if err != nil {
 		return fmt.Errorf("json.Marshal: %v", err)
 	}
@@ -256,7 +256,7 @@ func (mc *MyCloud) Delete(paths []string) error {
 		Method: "PUT",
 		Server: storageServer,
 		Action: "trash/items",
-		Reader: bytes.NewBuffer(reqJson),
+		Reader: bytes.NewBuffer(reqJSON),
 		Result: &r,
 	}); err != nil {
 		return fmt.Errorf("mc.Request: %v", err)
@@ -304,7 +304,7 @@ func (mc *MyCloud) GetFile(path string, dataWriter io.Writer, httpRange string) 
 		Server:    storageServer,
 		Action:    "object",
 		Path:      path,
-		HttpRange: httpRange,
+		HTTPRange: httpRange,
 		Response:  &response,
 	}); err != nil {
 		return fmt.Errorf("mc.Request: %v", err)

@@ -9,14 +9,7 @@ const (
 	mimeTypeAPIV2 = "application/vnd.x.restic.rest.v2"
 )
 
-type LogLevel uint
-
-const (
-	Debug LogLevel = 1
-	Trace LogLevel = 2
-)
-
+// API represents an API object.
 type API struct {
-	mc       map[string]*mycloud.MyCloud
-	logLevel LogLevel
+	mc map[string]*mycloud.MyCloud
 }

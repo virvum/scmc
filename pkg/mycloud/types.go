@@ -21,7 +21,7 @@ type Request struct {
 	Response    **http.Response
 	Reader      io.Reader
 	ContentType string
-	HttpRange   string
+	HTTPRange   string
 
 	// TODO QueryString string // conflicts with `Path`
 }
@@ -51,7 +51,7 @@ type IdentityResponse struct {
 	}
 	Editions            interface{}
 	LoginProviderBearer string
-	HashId              string
+	HashID              string
 }
 
 type UsageResponse struct {

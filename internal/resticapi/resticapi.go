@@ -260,13 +260,13 @@ func (a *API) list(username string, w http.ResponseWriter, r *http.Request) erro
 		}
 	}
 
-	responseJson, err := json.Marshal(response)
+	responseJSON, err := json.Marshal(response)
 	if err != nil {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return fmt.Errorf("json.Marshal: %v", err)
 	}
 
-	w.Write(responseJson)
+	w.Write(responseJSON)
 
 	return nil
 }

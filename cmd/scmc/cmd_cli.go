@@ -22,6 +22,7 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
+// CliOptions type.
 type CliOptions struct {
 	Username string
 	Password string
@@ -73,7 +74,7 @@ Or:
 			fmt.Print("Swisscom myCloud username: ")
 			u, err := reader.ReadString('\n')
 			if err != nil {
-				return fmt.Errorf("reader.ReadString: %v\n", err)
+				return fmt.Errorf("reader.ReadString: %v", err)
 			}
 
 			username = u
@@ -87,7 +88,7 @@ Or:
 			fmt.Print("Swisscom myCloud password: ")
 			p, err := terminal.ReadPassword(int(syscall.Stdin))
 			if err != nil {
-				return fmt.Errorf("terminal.ReadPassword: %v\n", err)
+				return fmt.Errorf("terminal.ReadPassword: %v", err)
 			}
 
 			password = string(p)
@@ -113,7 +114,7 @@ func init() {
 func uploadDir(p string) error {
 	entries, err := ioutil.ReadDir(p)
 	if err != nil {
-		return fmt.Errorf("ioutil.ReadDir(%s): %v\n", p, err)
+		return fmt.Errorf("ioutil.ReadDir(%s): %v", p, err)
 	}
 
 	rp := path.Join(rpwd, p) + "/"
@@ -121,7 +122,7 @@ func uploadDir(p string) error {
 	fmt.Fprintf(os.Stderr, "creating remote directory '%s'\n", rp[1:])
 
 	if err := mc.CreateDirectory(rp); err != nil {
-		return fmt.Errorf("mc.CreateDirectory(%s): %v\n", p, err)
+		return fmt.Errorf("mc.CreateDirectory(%s): %v", p, err)
 	}
 
 	for _, f := range entries {
@@ -139,7 +140,7 @@ func uploadDir(p string) error {
 				return fmt.Errorf("uploadFile(%s): %v", fp, err)
 			}
 		default:
-			return fmt.Errorf("invalid filetype: %v\n", path.Join(p, f.Name()))
+			return fmt.Errorf("invalid filetype: %v", path.Join(p, f.Name()))
 		}
 	}
 
@@ -149,12 +150,12 @@ func uploadDir(p string) error {
 func uploadFile(p string) error {
 	file, err := os.Open(p)
 	if err != nil {
-		return fmt.Errorf("os.Open(%s): %v\n", p, err)
+		return fmt.Errorf("os.Open(%s): %v", p, err)
 	}
 
 	st, err := file.Stat()
 	if err != nil {
-		return fmt.Errorf("f.Stat: %v\n", err)
+		return fmt.Errorf("f.Stat: %v", err)
 	}
 
 	rp := path.Join(rpwd, path.Base(p))
@@ -171,7 +172,7 @@ func uploadFile(p string) error {
 	bar.Start()
 
 	if err := mc.CreateFile(rp, reader); err != nil {
-		return fmt.Errorf("mc.CreateFile(%s): %v\n", rp, err)
+		return fmt.Errorf("mc.CreateFile(%s): %v", rp, err)
 	}
 
 	bar.Finish()
@@ -183,7 +184,7 @@ func uploadFile(p string) error {
 func upload(p string) error {
 	f, err := os.Stat(p)
 	if err != nil {
-		return fmt.Errorf("os.Stat(%s): %v\n", p, err)
+		return fmt.Errorf("os.Stat(%s): %v", p, err)
 	}
 
 	switch mode := f.Mode(); {
@@ -193,13 +194,13 @@ func upload(p string) error {
 		return uploadFile(p)
 	}
 
-	return fmt.Errorf("invalid filetype: %v\n", p)
+	return fmt.Errorf("invalid filetype: %v", p)
 }
 
 func download(p string) error {
 	metadata, err := mc.Metadata(p)
 	if err != nil {
-		return fmt.Errorf("mc.Metadata(%s): %v\n", p, err)
+		return fmt.Errorf("mc.Metadata(%s): %v", p, err)
 	}
 
 	// TODO

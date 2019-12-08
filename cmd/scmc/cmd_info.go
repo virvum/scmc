@@ -45,7 +45,7 @@ var cmdInfo = &cobra.Command{
 			fmt.Print("Swisscom myCloud username: ")
 			u, err := reader.ReadString('\n')
 			if err != nil {
-				return fmt.Errorf("reader.ReadString: %v\n", err)
+				return fmt.Errorf("reader.ReadString: %v", err)
 			}
 
 			username = u
@@ -59,7 +59,7 @@ var cmdInfo = &cobra.Command{
 			fmt.Print("Swisscom myCloud password: ")
 			p, err := terminal.ReadPassword(int(syscall.Stdin))
 			if err != nil {
-				return fmt.Errorf("terminal.ReadPassword: %v\n", err)
+				return fmt.Errorf("terminal.ReadPassword: %v", err)
 			}
 
 			password = string(p)

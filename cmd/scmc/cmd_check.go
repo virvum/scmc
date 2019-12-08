@@ -41,7 +41,7 @@ var cmdCheck = &cobra.Command{
 			fmt.Print("Swisscom myCloud username: ")
 			u, err := reader.ReadString('\n')
 			if err != nil {
-				return fmt.Errorf("reader.ReadString: %v\n", err)
+				return fmt.Errorf("reader.ReadString: %v", err)
 			}
 
 			username = u
@@ -55,7 +55,7 @@ var cmdCheck = &cobra.Command{
 			fmt.Print("Swisscom myCloud password: ")
 			p, err := terminal.ReadPassword(int(syscall.Stdin))
 			if err != nil {
-				return fmt.Errorf("terminal.ReadPassword: %v\n", err)
+				return fmt.Errorf("terminal.ReadPassword: %v", err)
 			}
 
 			password = string(p)
@@ -131,10 +131,9 @@ func runCheck() error {
 		if err != nil {
 			fmt.Printf("[%2d/%d] %s: %v\n\nA check failed.\n", i+1, total, check.Name, err)
 			return nil
-		} else {
-			fmt.Printf("[%2d/%d] %s: OK\n", i+1, total, check.Name)
 		}
 
+		fmt.Printf("[%2d/%d] %s: OK\n", i+1, total, check.Name)
 		// TODO flush stdout
 	}
 

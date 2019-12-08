@@ -10,10 +10,10 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
-// Log Level type.
+// Level represents the logger's level.
 type Level int
 
-// Log level constants.
+// Logger level constants.
 const (
 	Trace Level = iota
 	Debug
@@ -23,15 +23,15 @@ const (
 	Fatal
 )
 
-// Available log levels as strings.
+// LogLevels contains available log levels as strings.
 var LogLevels []string = []string{"trace", "debug", "info", "warn", "error", "fatal"}
 
-// Returns the log level as a string.
+// String returns the log level as a string.
 func (l Level) String() string {
 	return LogLevels[l]
 }
 
-// Return the type of "Level".
+// Type return the type of Level.
 func (l Level) Type() string {
 	return "string"
 }
@@ -58,7 +58,7 @@ func (l *Level) Set(level string) error {
 	return nil
 }
 
-// UnmashalYAML unmarshals the logger Level type.
+// UnmarshalYAML unmarshals the logger Level type.
 func (l Level) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var s string
 
@@ -73,7 +73,7 @@ func (l Level) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-// Logger Log type.
+// Log represents the Log object.
 type Log struct {
 	Level    Level
 	Color    bool
