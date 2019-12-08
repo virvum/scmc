@@ -193,6 +193,9 @@ func (mc *MyCloud) authenticate(username string, password string) error {
 	}
 
 	params, err = url.ParseQuery(r.Request.URL.RawQuery)
+	if err != nil {
+		return fmt.Errorf("url.ParseQuery: %v", err)
+	}
 
 	accessToken := params.Get("access_token")
 	if accessToken == "" {
