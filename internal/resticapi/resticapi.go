@@ -83,9 +83,9 @@ func (a *API) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if r.URL.Query().Get("create") != "true" {
 				http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 				err = fmt.Errorf("bad request to restic REST API")
+			} else {
+				err = a.create(username, w, r)
 			}
-
-			err = a.create(username, w, r)
 		case http.MethodDelete:
 			err = a.delete(username, w, r)
 		case http.MethodGet:
