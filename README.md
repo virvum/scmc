@@ -1,6 +1,7 @@
 **WARNING: this software is work in progress.**
 
 [![GoDoc](https://godoc.org/github.com/virvum/scmc?status.svg)](https://godoc.org/github.com/virvum/scmc)
+[![pkg.go.dev](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/virvum/scmc?tab=doc)
 [![Go Report Card](https://goreportcard.com/badge/github.com/virvum/scmc)](https://goreportcard.com/report/github.com/virvum/scmc)
 
 # scmc - Swisscom myCloud utilities and library
